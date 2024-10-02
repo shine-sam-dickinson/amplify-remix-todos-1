@@ -9,11 +9,11 @@ import {
 
 // AMPLIFY
 import { Amplify } from "aws-amplify";
-import config from "../src/aws-exports";
+import outputs from "../amplify_outputs.json";
 import styles from "@aws-amplify/ui-react/styles.css";
 import { Authenticator } from "@aws-amplify/ui-react";
 
-Amplify.configure({ ...config });
+Amplify.configure(outputs);
 
 export function links() {
   return [
