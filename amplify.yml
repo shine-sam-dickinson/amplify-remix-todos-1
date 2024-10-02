@@ -1,26 +1,19 @@
 version: 1
-baseDirectory: .amplify-hosting
+backend:
+  phases:
+    build:
+      commands:
+        - npm ci --cache .npm --prefer-offline
+        - npx ampx pipeline-deploy --branch $AWS_BRANCH --app-id $AWS_APP_ID
 frontend:
   phases:
-    preBuild:
-      commands:
-        - npm ci
     build:
       commands:
         - npm run build
-        - mv build .amplify-hosting
-        - mv .amplify-hosting/client .amplify-hosting/static
-        - mkdir -p .amplify-hosting/compute
-        - mv .amplify-hosting/server .amplify-hosting/compute/default
-        - npm ci --omit dev
-        - cp package.json .amplify-hosting/compute/default
-        - cp -r node_modules .amplify-hosting/compute/default
-        - cp server.js .amplify-hosting/compute/default
-        - cp deploy-manifest.json .amplify-hosting/deploy-manifest.json
   artifacts:
+    baseDirectory: dist
     files:
       - "**/*"
-    baseDirectory: .amplify-hosting
   cache:
     paths:
       - .npm/**/*
