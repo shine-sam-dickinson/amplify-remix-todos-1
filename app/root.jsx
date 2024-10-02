@@ -43,7 +43,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="ui container" style={{marginTop:40}}>
+      <body className="ui container" style={{ marginTop: 40 }}>
         <Authenticator.Provider>
           <Outlet />
           <ScrollRestoration />
